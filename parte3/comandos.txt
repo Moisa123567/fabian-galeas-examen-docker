@@ -1,0 +1,22 @@
+# Levantar stack
+docker-compose up -d
+
+# Verificar que todos están "Up"
+docker-compose ps
+
+# Probar API
+curl http://localhost:3000/
+curl http://localhost:3000/salud
+
+# Probar Web
+curl http://localhost:8080/
+
+# Ver logs de API y DB
+docker-compose logs api
+docker-compose logs db
+
+# Mongo Express en navegador:
+# http://localhost:8081
+
+# Detener y limpiar todo (incluye volúmenes)
+docker-compose down -v
