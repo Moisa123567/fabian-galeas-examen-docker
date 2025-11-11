@@ -1,0 +1,24 @@
+# ===== Ejercicio 1.1: nginx:alpine =====
+docker pull nginx:alpine
+docker run -d -p 8080:80 --name web-examen nginx:alpine
+docker ps
+docker logs web-examen
+docker inspect web-examen | grep -i "IPAddress"
+docker stop web-examen
+docker rm web-examen
+
+# ===== Ejercicio 1.2: Postgres con volumen =====
+docker volume create datos-examen
+
+docker run -d   --name db-examen   -e POSTGRES_PASSWORD=examen123   -e POSTGRES_DB=testdb   -v datos-examen:/var/lib/postgresql/data   -p 5432:5432   postgres:15-alpine
+
+docker ps
+docker logs db-examen
+
+# Verificar persistencia: detener, borrar y recrear con el mismo volumen
+docker stop db-examen
+docker rm db-examen
+docker run -d   --name db-examen   -e POSTGRES_PASSWORD=examen123   -e POSTGRES_DB=testdb   -v datos-examen:/var/lib/postgresql/data   -p 5432:5432   postgres:15-alpine
+
+docker volume ls
+docker ps
