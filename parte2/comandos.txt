@@ -1,0 +1,18 @@
+# Build
+docker build -t mi-app-python:examen .
+
+# Run
+docker run -d -p 5000:5000 --name app-examen mi-app-python:examen
+
+# Probar endpoints
+curl http://localhost:5000/
+curl http://localhost:5000/salud
+
+# Healthcheck
+docker inspect --format '{{.State.Health.Status}}' app-examen
+
+# Logs
+docker logs app-examen
+
+# Limpiar
+docker stop app-examen && docker rm app-examen
